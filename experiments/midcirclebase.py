@@ -1,10 +1,10 @@
-import torch
-from torch import nn
 import matplotlib.pyplot as plt
+import torch
+from cloverd.propositional_constraints.clause import Clause
+from cloverd.propositional_constraints.clauses_group import ClausesGroup
+from torch import nn
 
-from ccn import ClausesGroup, Clause
 from shapes import HalfPlane, Circle
-from experiment import Experiment
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(device)

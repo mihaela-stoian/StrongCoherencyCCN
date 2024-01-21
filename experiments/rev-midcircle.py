@@ -1,4 +1,5 @@
-from midcirclebase import Experiment, NeuralNetwork, shapes, constraints2
+from base import Experiment
+from midcirclebase import NeuralNetwork, shapes, constraints2
 
 model = NeuralNetwork()
 experiment = Experiment('midcircle-rev', model, shapes, constraints2)

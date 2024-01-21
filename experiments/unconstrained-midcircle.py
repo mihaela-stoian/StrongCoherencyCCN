@@ -1,4 +1,5 @@
-from midcirclebase import Experiment, NeuralNetwork, shapes
+from base import Experiment
+from midcirclebase import NeuralNetwork, shapes
 
 model = NeuralNetwork()
 experiment = Experiment('midcircle-unconstained', model, shapes, [])

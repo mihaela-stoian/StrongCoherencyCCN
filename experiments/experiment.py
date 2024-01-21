@@ -1,13 +1,14 @@
-from matplotlib.pyplot import draw_if_interactive
-import torch
 import time
+
+import torch
+from cloverd.propositional_constraints.constraints_layer import ConstraintsLayer
+from cloverd.propositional_constraints.util import draw_classes, train, test
 from torch import nn
-from torch.utils.data import DataLoader 
+from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
-import context
-from ccn import ConstraintsLayer, train, test, draw_classes
 from shapes import ShapeDataset
+
 
 class Experiment:
     def __init__(self, name, model, shapes, constraints, points = 2500, batch_size=2500):
