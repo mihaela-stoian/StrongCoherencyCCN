@@ -25,7 +25,7 @@ class Experiment:
         self.test_dataloader = DataLoader(test_data, batch_size=batch_size)
 
         # Build constraints layer & optimizer
-        self.clayer = ConstraintsLayer(constraints, len(shapes))
+        self.clayer = ConstraintsLayer(len(shapes), constraints)
         self.loss_fn = nn.BCELoss()
         
         learning_rate = 1e-2
