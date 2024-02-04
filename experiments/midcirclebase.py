@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import torch
-from cloverd.propositional_constraints.clause import Clause
-from cloverd.propositional_constraints.clauses_group import ClausesGroup
+from pishield.propositional_constraints.clause import Clause
+from pishield.propositional_constraints.clauses_group import ClausesGroup
 from torch import nn
 
 from shapes import HalfPlane, Circle
