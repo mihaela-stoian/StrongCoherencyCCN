@@ -23,7 +23,7 @@ class Shape:
     result[(0 < image) & (image < 4)] = 1.
     return result
 
-  def plot(self, ax, full=False):
+  def plot(self, ax, full=False, cmap='winter'):
     dots = np.arange(0., 1., 0.01)
     grid = [(x, y) for y in dots for x in dots]
 
@@ -39,7 +39,7 @@ class Shape:
     ax.imshow(
       image, 
       alpha=alpha, 
-      cmap='winter', 
+      cmap=cmap,
       interpolation='nearest', 
       origin='lower', 
       extent=(0., 1., 0., 1.),

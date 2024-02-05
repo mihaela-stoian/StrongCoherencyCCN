@@ -42,7 +42,7 @@ class Experiment:
     def get_ratios(cls, epochs, progressive):
         return [cls.get_ratio((t + 1) / epochs, progressive) for t in range(epochs)]
 
-    def run(self, epochs, device, progressive=0.):
+    def run(self, epochs, device='cpu', progressive=0.):
         ratios = Experiment.get_ratios(epochs, progressive)
         sw = SummaryWriter()
 
@@ -82,4 +82,5 @@ class Experiment:
     def save(self, dir='./'):
         path = self.experiment_path(dir)
         torch.save(self.model, path + ".pth")
+        print('Saved experiment at {path}'.format(path=path))
         self.draw_results(path=path)
