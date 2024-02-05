@@ -28,7 +28,7 @@ class Experiment:
         self.clayer = ConstraintsLayer(len(shapes), constraints)
         self.loss_fn = nn.BCELoss()
         
-        learning_rate = 1e-2
+        learning_rate = 1e-1
         self.optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate, betas = (0.9, 0.999))
 
     @classmethod
@@ -56,7 +56,7 @@ class Experiment:
                 sw.add_scalar(f'Accuracy/test (label {i})', rate, t)
             self.test_loss = loss
         
-            if t % 100 == 0:
+            if t % 1000 == 0:
                 self.draw_results(sw=sw, epoch=t)
 
         print("Done!")
