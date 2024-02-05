@@ -11,11 +11,10 @@ from shapes import ShapeDataset
 
 
 class Experiment:
-    def __init__(self, name, model, shapes, constraints, points = 2500, batch_size=2500):
+    def __init__(self, name, model, shapes, constraints_path, points = 2500, batch_size=2500):
         self.name = name
         self.model = model 
         self.shapes = shapes 
-        self.constraints = constraints 
 
         # Build dataset
         train_data = ShapeDataset(shapes, points)
@@ -25,7 +24,7 @@ class Experiment:
         self.test_dataloader = DataLoader(test_data, batch_size=batch_size)
 
         # Build constraints layer & optimizer
-        self.clayer = ConstraintsLayer(len(shapes), constraints)
+        self.clayer = ConstraintsLayer(len(shapes), constraints_path)
         self.loss_fn = nn.BCELoss()
         
         learning_rate = 1e-1
