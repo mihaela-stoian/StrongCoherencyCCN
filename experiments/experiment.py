@@ -81,5 +81,12 @@ class Experiment:
     def save(self, dir='./'):
         path = self.experiment_path(dir)
         torch.save(self.model, path + ".pth")
+        torch.save(self.clayer, path + "_clayer.pth")
         print('Saved experiment at {path}'.format(path=path))
         self.draw_results(path=path)
+
+
+def load_trained_model(path):
+    model = torch.load(path + '.pth')
+    clayer = torch.load(path + '_clayer.pth')
+    return model, clayer

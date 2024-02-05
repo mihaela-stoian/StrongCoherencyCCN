@@ -3,7 +3,8 @@ import matplotlib.patches as patches
 import numpy as np
 import torch
 
-def plotting_experiment_results(experiment, model1, rect0, rect1):
+def plotting_experiment_results(trained_model, rect0, rect1):
+    model1, clayer = trained_model
     x = np.linspace(0, 1, 1000)
     y = x
     z = torch.tensor([[[i, j] for i in x] for j in y]).reshape(-1, 2).float()
@@ -11,7 +12,7 @@ def plotting_experiment_results(experiment, model1, rect0, rect1):
     z0 = out[:, :, 0]
     z1 = out[:, :, 1]
     out = model1(z)
-    fout = experiment.clayer(out)
+    fout = clayer(out)
     fout = fout.detach().reshape(len(x), len(y), 2)
     fz0 = fout[:, :, 0]
     fz1 = fout[:, :, 1]
