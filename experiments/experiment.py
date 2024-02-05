@@ -10,8 +10,8 @@ from torch.utils.tensorboard import SummaryWriter
 from shapes import ShapeDataset
 
 
-class Experiment:
-    def __init__(self, name, model, shapes, constraints_path, points = 2500, batch_size=2500):
+class Experiment():
+    def __init__(self, name, model, shapes, points = 2500, batch_size=2500):
         self.name = name
         self.model = model 
         self.shapes = shapes 
@@ -23,12 +23,10 @@ class Experiment:
         self.train_dataloader = DataLoader(train_data, batch_size=batch_size)
         self.test_dataloader = DataLoader(test_data, batch_size=batch_size)
 
-        # Build constraints layer & optimizer
-        self.clayer = ConstraintsLayer(len(shapes), constraints_path)
-        self.loss_fn = nn.BCELoss()
-        
+        # Build optimizer
         learning_rate = 1e-1
         self.optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate, betas = (0.9, 0.999))
+        self.loss_fn = nn.BCELoss()
 
     @classmethod
     def get_ratio(cls, progress, progressive):
@@ -42,25 +40,31 @@ class Experiment:
         return [cls.get_ratio((t + 1) / epochs, progressive) for t in range(epochs)]
 
     def run(self, epochs, device='cpu', progressive=0.):
+        self.model, self.clayer = self.model.to(device), self.clayer.to(device)
+
         ratios = Experiment.get_ratios(epochs, progressive)
         sw = SummaryWriter()
 
         for t, ratio in enumerate(ratios):
-            print(f"Epoch {t+1}, Ratio {ratio}\n-----------------------")
-            train(self.train_dataloader, self.model, self.clayer, self.loss_fn, self.optimizer, device, ratio=ratio)
+            if t % 10 == 0:
+                print(f"Epoch {t + 1}/{len(ratios)}, Ratio {ratio}\n-----------------------")
+            self.train_step(device, ratio=ratio)
             loss, correct = test(self.test_dataloader, self.model, self.clayer, self.loss_fn, device)
 
             sw.add_scalar('Loss/test', loss, t)
             for i, rate in enumerate(correct):
                 sw.add_scalar(f'Accuracy/test (label {i})', rate, t)
             self.test_loss = loss
-        
+
             if t % 1000 == 0:
                 self.draw_results(sw=sw, epoch=t)
 
         print("Done!")
         self.draw_results(sw=sw, epoch=len(ratios))
         sw.close()
+
+    def train_step(self):
+        pass
 
     def experiment_path(self, dir):
         return f"{dir + self.name}-{self.test_loss:.5}-{int(time.time())}"
@@ -90,3 +94,4 @@ def load_trained_model(path):
     model = torch.load(path + '.pth')
     clayer = torch.load(path + '_clayer.pth')
     return model, clayer
+
