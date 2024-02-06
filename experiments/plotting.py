@@ -55,10 +55,10 @@ def plotting_experiment_results_net(model1, clayer, rect0, rect1):
     x = np.linspace(0, 1, 1000)
     y = x
     z = torch.tensor([[[i, j] for i in x] for j in y]).reshape(-1, 2).float()
-    out = model1.unconstrained_forward(z).detach().reshape(len(x), len(y), 2)
+    out = model1.get_unconstrained_output(z).detach().reshape(len(x), len(y), 2)
     z0 = out[:, :, 0]
     z1 = out[:, :, 1]
-    out = model1.unconstrained_forward(z)
+    out = model1.get_unconstrained_output(z)
     fout = clayer(out)
     fout = fout.detach().reshape(len(x), len(y), 2)
     fz0 = fout[:, :, 0]
