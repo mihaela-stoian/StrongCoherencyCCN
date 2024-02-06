@@ -33,12 +33,12 @@ class Shape:
       image = self.find_borders(image)
 
     alpha = image 
-    alpha[alpha > 0.5] = 0.6
-    alpha[alpha < 0.5] = 0.
+    # alpha[alpha > 0.5] = 0.6
+    # alpha[alpha < 0.5] = 0.
 
     ax.imshow(
       image, 
-      alpha=alpha, 
+      alpha=alpha,
       cmap=cmap,
       interpolation='nearest', 
       origin='lower', 
