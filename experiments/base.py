@@ -2,8 +2,8 @@ import torch
 from torch import nn
 import matplotlib.pyplot as plt
 
-from pishield.propositional_constraints.constraint import Constraint
-from pishield.propositional_constraints.constraints_group import ConstraintsGroup
+from pishield.propositional_requirements.constraint import Constraint
+from pishield.propositional_requirements.constraints_group import ConstraintsGroup
 from shapes import Rectangle
 from experiment import Experiment
 

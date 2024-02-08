@@ -1,8 +1,8 @@
 import time
 
 import torch
-from pishield.propositional_constraints.constraints_layer import ConstraintsLayer
-from pishield.propositional_constraints.util import draw_classes, train, test
+from pishield.propositional_requirements.shield_layer import ShieldLayer
+from pishield.propositional_requirements.util import draw_classes, train, test
 from torch import nn
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
