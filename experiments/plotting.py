@@ -70,13 +70,13 @@ def plotting_experiment_results_net(model1, clayer, rect0, rect1):
 
     fig, ax = plt.subplots(2, 2, figsize=(10, 8))
     cs0 = ax[0,0].contourf(x, y, z0, cmap=cmap, alpha=0.9, levels=10, vmin=0, vmax=1.0)
-    ax[0,0].set_title("Class A - Final Output")
+    ax[0,0].set_title("Class A - Output After Shield Layer")
     cs3 = ax[0,1].contourf(x, y, fz1, cmap=cmap, alpha=0.9, levels=10, vmin=0, vmax=1.0)
-    ax[0,1].set_title("Class B - Final Output")
+    ax[0,1].set_title("Class B - Output After Shield Layer")
     cs2 = ax[1,0].contourf(x, y, fz0, cmap=cmap, alpha=0.9, levels=10, vmin=0, vmax=1.0)
-    ax[1,0].set_title("Class A - Output Before Layer")
+    ax[1,0].set_title("Class A - Output Before Shield Layer")
     cs1 = ax[1,1].contourf(x, y, z1, cmap=cmap, alpha=0.9, levels=10, vmin=0, vmax=1.0)
-    ax[1,1].set_title("Class B - Output Before Layer")
+    ax[1,1].set_title("Class B - Output Before Shield Layer")
 
     cbar0 = fig.colorbar(cs0)
     cbar1 = fig.colorbar(cs1)
